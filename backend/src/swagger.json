@@ -1,0 +1,276 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Bzz System API",
+    "description": "Bzz system API for controlling cars",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/api/",
+      "description": "From localhost api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Car",
+      "description": "API for cars in the system"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/car": {
+      "get": {
+        "tags": [
+          "Car"
+        ],
+        "summary": "Get all cars in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Car"
+        ],
+        "summary": "Create a new car in system",
+        "requestBody": {
+          "description": "Car Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/car/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the car that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Car"
+        ],
+        "summary": "Get car with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Car with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          },
+          "404": {
+            "description": "Failed. Car not found."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update car with given ID",
+        "tags": [
+          "Car"
+        ],
+        "requestBody": {
+          "description": "Car Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Car with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          },
+          "404": {
+            "description": "Failed. Car not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete car with given ID",
+        "tags": [
+          "Car"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Delete Car with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          },
+          "404": {
+            "description": "Failed. Cat not found."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "id": {
+      "properties": {
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
+    "Car": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string"
+        },
+        "gasTank": {
+          "type": "number"
+        },
+        "status": {
+          "type": "number"
+        },
+        "location": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "Cars": {
+      "type": "object",
+      "properties": {
+        "car": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Car"
+          }
+        }
+      }
+    },
+    "Model": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "prices": {
+          "$ref": "#/definitions/Price"
+        }
+      }
+    },
+    "Models": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Model"
+          }
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "minute": {
+          "type": "number"
+        },
+        "hour": {
+          "type": "number"
+        },
+        "day": {
+          "type": "number"
+        },
+        "week": {
+          "type": "number"
+        },
+        "month": {
+          "type": "number"
+        },
+        "km": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
