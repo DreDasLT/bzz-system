@@ -1,0 +1,98 @@
+###################### CARS #######################
+
+### CREATE NEW CAR
+POST http://localhost:3000/car HTTP/1.1
+Content-Type: application/json
+
+{
+  "model": "5f5a4bf30ac03467645c71d8",
+  "gasTank": 100,
+  "status": 0,
+  "location": [
+    56.30001225555228,
+    22.352923750877384
+  ]
+}
+
+### GET ALL CARS
+GET http://localhost:3000/car
+
+### GET SPECIFIC CAR
+GET http://localhost:3000/car/5f5a4f66e5fb6b6894dbfe7e
+
+### UPDATE SPECIFIC CAR
+PUT http://localhost:3000/car/5f5a4f66e5fb6b6894dbfe7e HTTP/1.1
+Content-Type: application/json
+
+{
+  "gasTank": 100,
+  "model": "5f637e4653e91cf13b9a130e"
+}
+
+### DELETE SPECIFIC CAR
+DELETE http://localhost:3000/car/5f5a4f66e5fb6b6894dbfe7e
+
+
+##################### MODELS ########################
+
+### CREATE NEW MODEL
+POST http://localhost:3000/model HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Volkswagen Golf",
+  "prices": "5f5a4a92dff1036711b96a83"
+}
+
+### GET ALL MODELS
+GET http://localhost:3000/model
+
+### GET SPECIFIC MODEL
+GET http://localhost:3000/model/5f637e4653e91cf13b9a130e
+
+### UPDATE SPECIFIC MODEL
+PUT http://localhost:3000/model/5f637e4653e91cf13b9a130e HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Volkswagen Golf",
+  "prices": "5f638e366234a1f23ceaa7c5"
+}
+
+### DELETE SPECIFIC MODEL
+DELETE http://localhost:3000/model/5f637e4653e91cf13b9a130e
+
+
+
+################### PRICES ######################
+
+### CREATE NEW PRICE
+POST http://localhost:3000/price HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Volkswagen Golf",
+  "minute": 0.2,
+  "hour": 6.19,
+  "day": 32.9,
+  "week": 159,
+  "month": 379,
+  "km": 0.2
+}
+
+### GET ALL PRICES
+GET http://localhost:3000/price
+
+### GET SPECIFIC PRICE
+GET http://localhost:3000/price/5f638e366234a1f23ceaa7c5
+
+### UPDATE SPECIFIC PRICE
+PUT http://localhost:3000/price/5f638e366234a1f23ceaa7c5 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Volkswagen Golf"
+}
+
+### DELETE SPECIFIC PRICE
+DELETE http://localhost:3000/price/5f638e366234a1f23ceaa7c5
