@@ -1,1 +1,1 @@
-web: node backend/dist/backend/src/index.js
+web: node index.js
