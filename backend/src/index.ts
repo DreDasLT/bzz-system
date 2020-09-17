@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express'
 import {connect, database} from "./database/database"
 import router from './core/routes'
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 const app = express()
 app.use(express.json())
