@@ -2,6 +2,10 @@ import express, {Request, Response} from 'express'
 import {connect, database} from "./database/database"
 import router from './core/routes'
 
+import * as dotenv from 'dotenv';
+
+dotenv.config()
+
 const PORT = process.env.PORT || 3000
 
 

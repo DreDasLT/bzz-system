@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 let database: Mongoose.Connection;
 const connect = () => {
   // add your own uri below
-  const uri = "mongodb+srv://bzz:bzz@cluster0.u9bse.mongodb.net/bzz?retryWrites=true&w=majority";
+  const uri = process.env.MONGO_URI;
   if (database) {
     return;
   }

@@ -18,7 +18,15 @@
   "tags": [
     {
       "name": "Car",
-      "description": "API for cars in the system"
+      "description": "Endpoints with cars in the system"
+    },
+    {
+      "name": "Model",
+      "description": "Endpoints with models in the system"
+    },
+    {
+      "name": "Price",
+      "description": "Endpoints with prices in the system"
     }
   ],
   "consumes": [
@@ -63,8 +71,8 @@
           "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Car"
             }
@@ -179,7 +187,319 @@
             }
           },
           "404": {
-            "description": "Failed. Cat not found."
+            "description": "Failed. Car not found."
+          }
+        }
+      }
+    },
+    "/model": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get all models in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Create a new model in system",
+        "requestBody": {
+          "description": "Model Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Model"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/model/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the model that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get model with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Model with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "404": {
+            "description": "Failed. Model not found."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update model with given ID",
+        "tags": [
+          "Model"
+        ],
+        "requestBody": {
+          "description": "Model Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Model"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Model with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          },
+          "404": {
+            "description": "Failed. Model not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete model with given ID",
+        "tags": [
+          "Model"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Delete Model with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "404": {
+            "description": "Failed. Model not found."
+          }
+        }
+      }
+    },
+    "/price": {
+      "get": {
+        "tags": [
+          "Price"
+        ],
+        "summary": "Get all prices in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Price"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Price"
+        ],
+        "summary": "Create a new price in system",
+        "requestBody": {
+          "description": "Price Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Price"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Price"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/price/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the price that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Price"
+        ],
+        "summary": "Get price with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Price with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Price"
+            }
+          },
+          "404": {
+            "description": "Failed. Price not found."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update price with given ID",
+        "tags": [
+          "Price"
+        ],
+        "requestBody": {
+          "description": "Price Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Price"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Price with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Price"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          },
+          "404": {
+            "description": "Failed. Price not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete price with given ID",
+        "tags": [
+          "Price"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Delete Price with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Price"
+            }
+          },
+          "404": {
+            "description": "Failed. Price not found."
           }
         }
       }

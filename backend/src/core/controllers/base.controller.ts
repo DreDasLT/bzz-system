@@ -15,7 +15,9 @@ export default class BaseController {
     try {
       const data = req.body
       const dbData = await this.model.create(data)
-      res.send(dbData)
+      if (dbData) {
+        res.status(201).send(dbData)
+      }
     } catch (error) {
       res.status(400).send(`Error in POST ${this.modelName}`)
     }
@@ -34,6 +36,10 @@ export default class BaseController {
     try {
       const { id } = req.params
       const dbData = await this.model.find({_id: id})
+      if (!dbData) {
+        res.status(404).send(`Can not find with id: ${id}`)
+        return;
+      }
       res.send(dbData)
     } catch (error) {
       res.status(400).send(`Error in GET ${this.modelName}`)
@@ -45,11 +51,15 @@ export default class BaseController {
       const body = req.body
       const { id } = req.params
 
-      const dbData = await this.model.findByIdAndUpdate(id, body, { useFindAndModify: false, new: true })
+      const dbData = await this.model.findByIdAndUpdate(id, body, { useFindAndModify: false, new: true }, (error, result) => {
+        if (!result) {
+          res.status(404).send(`Can not find with id: ${id}`)
 
-      res.send(dbData)
+          return
+        }
 
-      console.log(dbData)
+        res.send(result)
+      })
     } catch (error) {
       res.status(400).send(`Error in PUT ${this.modelName}`)
     }

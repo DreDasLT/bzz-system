@@ -36,8 +36,15 @@ export default class PriceController extends BaseController {
   public getById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params
-      const price = await this.model.findOne({_id: id}) as PriceI
-      res.send(price)
+      this.model.findOne({_id: id}, (error, result) => {
+        if (!result) {
+          res.status(404).send(`Can not find with id: ${id}`)
+
+          return
+        }
+
+        res.send(result)        
+      })
     } catch (error) {
       res.status(400).send(`Error in GET ${this.modelName}`)
     }
@@ -48,12 +55,18 @@ export default class PriceController extends BaseController {
       const body = req.body
       const { id } = req.params
 
-      const price = await this.model.findByIdAndUpdate(id, body, { 
+      this.model.findByIdAndUpdate(id, body, { 
         useFindAndModify: false,
         new: true 
-      }) as PriceI
+      }, (error, result) => {
+        if (!result) {
+          res.status(404).send(`Can not update with id: ${id}`)
 
-      res.send(price)
+          return
+        }
+
+        res.send(result)
+      })
     } catch (error) {
       res.status(400).send(`Error in PUT ${this.modelName}`)
     }

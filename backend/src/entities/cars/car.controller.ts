@@ -1,42 +1,3 @@
-// import express, { Router, Request, Response } from 'express'
-// import car from './car.model'
-
-// const endpoints = express()
-
-// // Get /cars
-// endpoints.get('/', async (req: Request, res: Response) => {
-//   try {
-//     res.sendStatus(404)
-//   } catch (e) {
-//     res.status(500).send(e.toString())
-//   }
-// });
-
-// // GET /cars/list
-// endpoints.get('/list', async (req: Request, res: Response) => {
-//   try {
-//     const cars = await car.find()
-//     res.json(cars)
-//   } catch (e) {
-//     res.status(500).send(e.toString())
-//   }
-// });
-
-// endpoints.post('/', async (req: Request, res: Response) => {
-//   try {
-//     const data = req.body
-//     console.log(req.body)
-//     const dbData = await car.create(data)
-//     console.log(dbData)
-//     res.json(dbData)
-//   } catch (e) {
-//     res.status(500).send(e.toString());
-//   }
-// });
-
-// export default endpoints;
-
-
 import BaseController from '../../core/controllers/base.controller'
 import Car from './car.model'
 import cars from '../../../../cars'
@@ -85,13 +46,22 @@ export default class CarController extends BaseController {
   public getById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params
-      const car = await this.model.findOne({_id: id}).populate({
+
+      this.model.findOne({_id: id}, (error, result) => {
+        if (!result) {
+          res.status(404).send(`Can not find with id: ${id}`)
+
+          return
+        }
+
+        res.send(result)        
+      }).populate({
         path: 'model',
         populate: {
           path: 'prices'
         }
-      }) as CarI
-      res.send(car)
+      })
+
     } catch (error) {
       res.status(400).send(`Error in GET ${this.modelName}`)
     }
@@ -102,17 +72,23 @@ export default class CarController extends BaseController {
       const body = req.body
       const { id } = req.params
 
-      const car = await this.model.findByIdAndUpdate(id, body, { 
+      this.model.findByIdAndUpdate(id, body, { 
         useFindAndModify: false,
         new: true 
+      }, (error, result) => {
+        if (!result) {
+          res.status(404).send(`Can not update with id: ${id}`)
+
+          return
+        }
+
+        res.send(result)
       }).populate({
         path: 'model',
         populate: {
           path: 'prices'
         }
-      }) as CarI
-
-      res.send(car)
+      })
     } catch (error) {
       res.status(400).send(`Error in PUT ${this.modelName}`)
     }
