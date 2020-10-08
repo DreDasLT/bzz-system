@@ -4,6 +4,7 @@ import { Request, Response } from 'express'
 import Price from '../prices/price.model'
 import Model from './model.model'
 import ModelI from './model.interface'
+import Car from '../cars/car.model'
 
 export default class ModelController extends BaseController {
   constructor() {
@@ -30,6 +31,9 @@ export default class ModelController extends BaseController {
   public get = async (req: Request, res: Response) => {
     try {
       const dbData = await this.model.find().populate("prices") as ModelI[]
+      if (dbData.length) {
+        dbData.sort((modelA, modelB) => modelA.name < modelB.name ? -1 : (modelA.name > modelB.name ? 1 : 0))
+      }
       res.send(dbData)
     } catch (error) {
       res.status(400).send(`Error in GET ${this.modelName}`)
@@ -72,6 +76,42 @@ export default class ModelController extends BaseController {
       }).populate("prices")
     } catch (error) {
       res.status(400).send(`Error in PUT ${this.modelName}`)
+    }
+  }
+
+  public getCarsById = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params
+      this.model.findOne({_id: id}, (error, result) => {
+        if (!result) {
+          res.status(404).send(`Can not find model with id: ${id}`)
+
+          return
+        }
+
+        const carEntity = Car
+
+        carEntity.find({model: {_id: id}}, (error, result) => {
+          if (!result) {
+            res.status(404).send(`Can not find any cars with given model id: ${id}`)
+            return
+          }
+
+          if (!result.length) {
+            res.status(404).send(`Can not find any cars with given model id: ${id}`)
+            return
+          }
+
+          res.send(result)
+        }).populate({
+          path: 'model',
+          populate: {
+            path: 'prices'
+          }
+        })      
+      })
+    } catch (error) {
+      res.status(400).send(`Error in GET ${this.modelName}`)
     }
   }
 }

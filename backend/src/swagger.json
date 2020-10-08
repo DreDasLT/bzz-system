@@ -348,6 +348,45 @@
         }
       }
     },
+    "/model/{id}/cars": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the model whose cars we are trying to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get cars with given model ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Model with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "404": {
+            "description": "Failed. Model not found."
+          }
+        }
+      }
+    },
     "/price": {
       "get": {
         "tags": [
