@@ -542,6 +542,45 @@
           }
         }
       }
+    },
+    "/price/{id}/models": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the price that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Price"
+        ],
+        "summary": "Get models with given price ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Price with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "404": {
+            "description": "Failed. Price not found."
+          }
+        }
+      }
     }
   },
   "definitions": {

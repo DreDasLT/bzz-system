@@ -10,6 +10,7 @@ priceRouter.get('/', priceController.get)
 priceRouter.get('/:id', priceController.getById)
 priceRouter.put('/:id', priceController.updateById)
 priceRouter.delete('/:id', priceController.deleteById)
+priceRouter.get('/:id/models', priceController.getModelsById)
 // priceRouter.get('/fill', priceController.fill)
 
 export default priceRouter
