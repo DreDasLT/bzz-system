@@ -38,6 +38,11 @@
   "paths": {
     "/car": {
       "get": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Car"
         ],
@@ -52,6 +57,11 @@
         }
       },
       "post": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Car"
         ],
@@ -94,6 +104,11 @@
         }
       ],
       "get": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Car"
         ],
@@ -122,6 +137,11 @@
         }
       },
       "put": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "summary": "Update car with given ID",
         "tags": [
           "Car"
@@ -164,6 +184,11 @@
         }
       },
       "delete": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "summary": "Delete car with given ID",
         "tags": [
           "Car"
@@ -194,6 +219,11 @@
     },
     "/model": {
       "get": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Model"
         ],
@@ -208,6 +238,11 @@
         }
       },
       "post": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Model"
         ],
@@ -250,6 +285,11 @@
         }
       ],
       "get": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Model"
         ],
@@ -278,6 +318,11 @@
         }
       },
       "put": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "summary": "Update model with given ID",
         "tags": [
           "Model"
@@ -320,6 +365,11 @@
         }
       },
       "delete": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "summary": "Delete model with given ID",
         "tags": [
           "Model"
@@ -359,6 +409,11 @@
         }
       ],
       "get": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Model"
         ],
@@ -389,6 +444,11 @@
     },
     "/price": {
       "get": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Price"
         ],
@@ -403,6 +463,11 @@
         }
       },
       "post": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Price"
         ],
@@ -445,6 +510,11 @@
         }
       ],
       "get": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Price"
         ],
@@ -473,6 +543,11 @@
         }
       },
       "put": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "summary": "Update price with given ID",
         "tags": [
           "Price"
@@ -515,6 +590,11 @@
         }
       },
       "delete": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "summary": "Delete price with given ID",
         "tags": [
           "Price"
@@ -554,6 +634,11 @@
         }
       ],
       "get": {
+        "security": [
+          {
+             "bearerAuth": []
+          }
+        ],
         "tags": [
           "Price"
         ],
@@ -668,6 +753,15 @@
         "km": {
           "type": "number"
         }
+      }
+    }
+  },
+  "components": {        
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

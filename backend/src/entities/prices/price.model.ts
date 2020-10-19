@@ -1,6 +1,6 @@
 
-import { Schema, model } from "mongoose";
-import PriceI from './price.interface';
+import { Schema, model } from "mongoose"
+import PriceI from './price.interface'
 
 const PriceSchema = new Schema<PriceI>({
   name: String,
@@ -18,9 +18,9 @@ const PriceSchema = new Schema<PriceI>({
     type: Date,
     default: new Date()
   }
-});
+})
 
 
-const Price = model('prices', PriceSchema);
+const Price = model('prices', PriceSchema)
 
-export default Price;
+export default Price
