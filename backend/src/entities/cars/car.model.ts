@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import CarI from './car.interface';
+import { Schema, model } from "mongoose"
+import CarI from './car.interface'
 
 const CarSchema = new Schema<CarI>({
   model: {
@@ -21,9 +21,9 @@ const CarSchema = new Schema<CarI>({
     type: [Number],
     index: '2dsphere'
   }
-});
+})
 
 
-const Car = model('cars', CarSchema);
+const Car = model('cars', CarSchema)
 
-export default Car;
+export default Car

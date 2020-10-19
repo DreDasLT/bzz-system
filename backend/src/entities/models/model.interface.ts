@@ -1,7 +1,7 @@
-import PriceI from '../prices/price.interface';
+import PriceI from '../prices/price.interface'
 
 export default interface ModelI {
-  name: string,
-  prices: PriceI,
+  name: string
+  prices: PriceI
 
 }

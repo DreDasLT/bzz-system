@@ -1,6 +1,6 @@
 
-import { Schema, model } from "mongoose";
-import ModelI from './model.interface';
+import { Schema, model } from "mongoose"
+import ModelI from './model.interface'
 
 const ModelSchema = new Schema<ModelI>({
   name: String,
@@ -16,9 +16,9 @@ const ModelSchema = new Schema<ModelI>({
     type: Date,
     default: new Date()
   }
-});
+})
 
 
-const Model = model('models', ModelSchema);
+const Model = model('models', ModelSchema)
 
-export default Model;
+export default Model

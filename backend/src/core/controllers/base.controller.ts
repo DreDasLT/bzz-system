@@ -38,7 +38,7 @@ export default class BaseController {
       const dbData = await this.model.find({_id: id})
       if (!dbData) {
         res.status(404).send(`Can not find with id: ${id}`)
-        return;
+        return
       }
       res.send(dbData)
     } catch (error) {
