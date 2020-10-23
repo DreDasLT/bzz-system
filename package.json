@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon",
-    "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/index.js"
+    "build": "rimraf ./dist && tsc && cd dist && mkdir client && cd client && mkdir build && cd .. && cd .. && cd client && rimraf ./build && npm run build && mv build ../dist/client",
+    "start": "npm run build && node dist/index.js"
   },
   "author": "",
   "license": "ISC",

@@ -7,7 +7,7 @@
       "noImplicitAny": true,
       "moduleResolution": "node",
       "sourceMap": true,
-      "outDir": "../dist",
+      "outDir": "./dist",
       "baseUrl": ".",
       "paths": {
           "*": [
@@ -17,6 +17,7 @@
   },
   "include": [
       "src/**/*",
-      "src/swagger.json"
-  ]
+      "src/swagger.json",
+      "./index.ts"
+  ],
 }
