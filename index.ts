@@ -14,19 +14,18 @@ const app = express()
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')))
 
+// const swaggerUi = require('swagger-ui-express')
+// const swaggerDocument = require('./src/swagger.json')
+ 
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+
 app.use(express.json())
 
 app.use('/api', router)
 
-
-const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require('./src/swagger.json')
- 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-
-
 console.log(path.join(__dirname+'/client/build/index.html'))
-app.get('*', (req,res) =>{
+app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'))
 });
 

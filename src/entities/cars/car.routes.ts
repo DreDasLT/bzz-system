@@ -7,7 +7,7 @@ const carRouter = Router()
 const carController = new CarController()
 
 carRouter.post('/', checkRole('superadmin'), carController.post)
-carRouter.get('/', checkRole(['basic', 'admin', 'superadmin']), carController.get)
+carRouter.get('/', carController.get)
 carRouter.get('/:id', checkRole(['basic', 'admin', 'superadmin']), carController.getById)
 carRouter.put('/:id', checkRole(['admin', 'superadmin']), carController.updateById)
 carRouter.delete('/:id', checkRole(['superadmin']), carController.deleteById)
