@@ -56,12 +56,12 @@ export const checkRole = (role: Role | Role[]) => {
 
       if (Array.isArray(role)) {
         if (!role.includes(req.user.role)) {
-          return res.status(401).send("Access Denied")
+          return res.status(403).send("Access Denied")
         }
         next()
       } else if (typeof role === 'string') {
         if (req.user.role !== role) {
-          return res.status(401).send("Access Denied")
+          return res.status(403).send("Access Denied")
         }
         next()
       }

@@ -3,6 +3,7 @@ import {connect, database} from "./database/database"
 import router from './core/routes'
 
 import * as dotenv from 'dotenv'
+import path from 'path'
 
 dotenv.config()
 
@@ -19,6 +20,8 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger.json')
  
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+app.use(express.static(path.join(process.cwd(), "..", "frontend", 'build')));
 
 app.listen(PORT, () => {
   console.log(`Started on: http://localhost:${PORT}`)
