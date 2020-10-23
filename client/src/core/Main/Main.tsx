@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import Home from '../../views/Home/Home';
 import Map from '../../views/Map/Map';
+import NotFound from '../../views/NotFound/NotFound';
 
 const StyledApp = styled.div`
   background-color: black;
@@ -40,6 +41,7 @@ const Main = () => {
             <Route path='/map'>
               <Map />
             </Route>
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>
