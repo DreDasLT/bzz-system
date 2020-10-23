@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 3000
 
 
 const app = express()
+// Serve the static files from the React app
+app.use(express.static(path.join(process.cwd(), 'client/build')))
+
 app.use(express.json())
 
 app.use('/api', router)
@@ -21,7 +24,10 @@ const swaggerDocument = require('./swagger.json')
  
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-app.use(express.static(path.join(process.cwd(), "..", "frontend", 'build')));
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(process.cwd()+'/client/build/index.html'))
+});
+
 
 app.listen(PORT, () => {
   console.log(`Started on: http://localhost:${PORT}`)

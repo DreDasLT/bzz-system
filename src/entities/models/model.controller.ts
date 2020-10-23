@@ -1,24 +1,27 @@
 import BaseController from '../../core/controllers/base.controller'
-import Price from './price.model'
-import cars from '../../../../cars'
+import cars from '../../../cars'
 import { Request, Response } from 'express'
-import PriceI from './price.interface'
-import Model from '../models/model.model'
+import Price from '../prices/price.model'
+import Model from './model.model'
+import ModelI from './model.interface'
+import Car from '../cars/car.model'
 
-export default class PriceController extends BaseController {
+export default class ModelController extends BaseController {
   constructor() {
-    super(Price)
+    super(Model)
   }
 
   // public fill = async (req: Request, res: Response) => {
   //   try {
   //     cars.forEach(async (car) => {
-  //       await this.model.create({
+  //       const pricings = await Price.find({name: car.model});
+  //       const pricingId = pricings[0]._id;
+  //       const hi = await this.model.create({
   //         name: car.model,
-  //         ...car.prices
+  //         prices: pricingId
   //       })
   //     })
-  //     res.send("Prices has been successfully filled.")
+  //     res.send("Models has been successfully filled.")
   //   } catch (error) {
   //     console.log(error)
   //     res.status(400).send(`Error in POST ${error}`)
@@ -27,8 +30,11 @@ export default class PriceController extends BaseController {
 
   public get = async (req: Request, res: Response) => {
     try {
-      const prices = await this.model.find() as PriceI[]
-      res.send(prices)
+      const dbData = await this.model.find().populate("prices") as ModelI[]
+      if (dbData.length) {
+        dbData.sort((modelA, modelB) => modelA.name < modelB.name ? -1 : (modelA.name > modelB.name ? 1 : 0))
+      }
+      res.send(dbData)
     } catch (error) {
       res.status(400).send(`Error in GET ${this.modelName}`)
     }
@@ -45,7 +51,7 @@ export default class PriceController extends BaseController {
         }
 
         res.send(result)        
-      })
+      }).populate("prices")
     } catch (error) {
       res.status(400).send(`Error in GET ${this.modelName}`)
     }
@@ -67,13 +73,13 @@ export default class PriceController extends BaseController {
         }
 
         res.send(result)
-      })
+      }).populate("prices")
     } catch (error) {
       res.status(400).send(`Error in PUT ${this.modelName}`)
     }
   }
 
-  public getModelsById = async (req: Request, res: Response) => {
+  public getCarsById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params
       this.model.findOne({_id: id}, (error, result) => {
@@ -83,21 +89,26 @@ export default class PriceController extends BaseController {
           return
         }
 
-        const modelEntity = Model
+        const carEntity = Car
 
-        modelEntity.find({prices: {_id: id}}, (error, result) => {
+        carEntity.find({model: {_id: id}}, (error, result) => {
           if (!result) {
-            res.status(404).send(`Can not find any models with given price id: ${id}`)
+            res.status(404).send(`Can not find any cars with given model id: ${id}`)
             return
           }
 
           if (!result.length) {
-            res.status(404).send(`Can not find any models with given price id: ${id}`)
+            res.status(404).send(`Can not find any cars with given model id: ${id}`)
             return
           }
 
           res.send(result)
-        }).populate("prices")      
+        }).populate({
+          path: 'model',
+          populate: {
+            path: 'prices'
+          }
+        })      
       })
     } catch (error) {
       res.status(400).send(`Error in GET ${this.modelName}`)

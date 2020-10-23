@@ -1,6 +1,6 @@
 import BaseController from '../../core/controllers/base.controller'
 import Car from './car.model'
-import cars from '../../../../cars'
+import cars from '../../../cars'
 import Model from '../models/model.model'
 import { Request, Response } from 'express'
 import CarI from './car.interface'
