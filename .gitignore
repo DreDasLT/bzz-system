@@ -1,4 +1,7 @@
 node_modules/
 backend/.env
-frontend/node_modules/
+client/node_modules/
+dist
+client/build
+
 
