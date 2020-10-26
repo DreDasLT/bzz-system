@@ -1,6 +1,6 @@
 {
   "watch": ["src", "./index.ts", "client/"],
   "ext": ".ts,.js,.json,.tsx",
-  "ignore": ["client/build"],
+  "ignore": ["client/build", "public"],
   "exec": "cd client && npm run build && cd .. && ts-node ./index.ts"
 }
