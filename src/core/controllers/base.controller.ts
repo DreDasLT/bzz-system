@@ -69,8 +69,11 @@ export default class BaseController {
     try {
       const { id } = req.params
       const dbData = await this.model.findByIdAndDelete({_id: id})
-      res.send(dbData)
-      // sutikrinti ar istryne ar ne.
+      if (dbData) {
+        res.send(dbData)
+      } else {
+        res.status(404).send(`Can not find and delete with id: ${id}`)
+      }
     } catch (error) {
       res.status(400).send(`Error in DELETE ${this.modelName}`)
     }

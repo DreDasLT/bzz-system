@@ -3,5 +3,6 @@ backend/.env
 client/node_modules/
 dist
 client/build
+public/
 
 
