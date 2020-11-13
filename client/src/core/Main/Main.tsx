@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import Home from '../../views/Home/Home';
-import Map from '../../views/Map/Map';
+import MapView from '../../views/Map/Map';
 import NotFound from '../../views/NotFound/NotFound';
+
 
 const StyledApp = styled.div`
   background-color: black;
@@ -146,28 +147,17 @@ const Main = () => {
             </header>
 
             <div className='w-full h-screen overflow-x-hidden border-t flex flex-col'>
-              <main className='w-full flex-grow p-6'>
+              <main className='w-full flex-grow'>
                 <Switch>
                   <Route exact path='/'>
                     <Home />
                   </Route>
                   <Route path='/map'>
-                    <Map />
+                    <MapView />
                   </Route>
                   <Route component={NotFound} />
                 </Switch>
               </main>
-
-              <footer className='w-full bg-white text-right p-4'>
-                Built by{' '}
-                <a
-                  target='_blank'
-                  className='underline'
-                >
-                  Vilius Antanavičius
-                </a>
-                .
-              </footer>
             </div>
           </div>
         </div>
