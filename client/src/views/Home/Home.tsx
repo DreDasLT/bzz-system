@@ -4,7 +4,7 @@ const Home = () => {
   const [cars, setCars] = useState([])
 
   useEffect(() => {
-    fetch('/api/car')
+    fetch('https://car-sharing-server.herokuapp.com/api/car')
       .then(res => res.json())
       .then(result => console.log(result))
   })
