@@ -1,5 +1,5 @@
 {
-  "watch": ["src", "./index.ts", "client/"],
+  "watch": ["src", "./index.ts"],
   "ext": ".ts,.js,.json,.tsx",
   "ignore": ["client/build", "public"],
   "exec": "ts-node ./index.ts"
