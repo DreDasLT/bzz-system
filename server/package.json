@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon",
-    "build": "rimraf ./dist && tsc && cd dist && mkdir client && cd client && mkdir build && cd .. && cd .. && cd client && rimraf ./build && npm install && npm run build && mv build ../dist/client",
+    "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/index.js"
   },
   "author": "",
