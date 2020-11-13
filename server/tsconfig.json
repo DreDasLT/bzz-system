@@ -17,7 +17,6 @@
     },
     "include": [
         "src/**/*",
-        "src/swagger.json",
-        "server/index.ts"
+        "src/swagger.json"
     ],
 }
