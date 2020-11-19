@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LatLngTuple, Icon } from 'leaflet';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -24,7 +24,9 @@ const MapView = () => {
     }
   };
 
-  getLocation();
+  useEffect(() => {
+    getLocation()
+  }, [])
 
   let icon = new Icon({
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),

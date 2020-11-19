@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { Dispatch, useState } from 'react';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import Home from '../../views/Home/Home';
 import MapView from '../../views/Map/Map';
 import NotFound from '../../views/NotFound/NotFound';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../state/reducers/rootReducer';
+import { HeaderActions } from '../../state/actions/headerActions';
 
-
-const StyledApp = styled.div`
-  background-color: black;
-  font-size: 32px;
-  color: white;
-`;
 
 const Main = () => {
-  const [isOpenProfile, setIsOpenProfile] = useState(false);
-  const [isOpenHeader, setIsOpenHeader] = useState(false);
+  const { headerOpen, profileOpen} = useSelector((state: AppState) => state.header);
+  const headerDispatch = useDispatch<Dispatch<HeaderActions>>();
+
+  const handleHeaderToggle = () => {
+    headerDispatch({ type: 'TOGGLE_HEADER' })
+  };
+
+  const handleHeaderProfileToggle = () => {
+    headerDispatch({ type: 'TOGGLE_PROFILE' });
+  };
+  
   return (
     <>
       <Router>
@@ -62,18 +67,15 @@ const Main = () => {
               <div className='w-1/2'></div>
               <div className='relative w-1/2 flex justify-end'>
                 <button
-                  onClick={() => {
-                    setIsOpenProfile(!isOpenProfile);
-                    console.log(!isOpenProfile);
-                  }}
+                  onClick={() => handleHeaderProfileToggle()}
                   className='realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none'
                 >
                   <img src='https://source.unsplash.com/uJ8LNVCBjFQ/400x400' />
                 </button>
-                {isOpenProfile && (
+                {profileOpen && (
                   <div
                     x-show='isOpen'
-                    className='absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16'
+                    className='absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16 z-999'
                   >
                     <a
                       href='#'
@@ -109,19 +111,16 @@ const Main = () => {
                   Admin
                 </a>
                 <button
-                  onClick={() => {
-                    setIsOpenHeader(!isOpenHeader)
-                    console.log(isOpenHeader)
-                  }}
+                  onClick={() => handleHeaderToggle()}
                   className='text-white text-3xl focus:outline-none'
                 >
-                  {isOpenHeader ? 
+                  {headerOpen ? 
                     (<i className='fas fa-times'></i>) :
                     (<i className='fas fa-bars'></i>)}
                 </button>
               </div>
 
-              <nav className={isOpenHeader ? 'flex flex-col pt-4': 'hidden'}>
+              <nav className={headerOpen ? 'flex flex-col pt-4': 'hidden'}>
                 <Link
                   to='/'
                   className='flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item'

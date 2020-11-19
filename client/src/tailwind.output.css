@@ -19779,6 +19779,10 @@ video {
   z-index: 50;
 }
 
+.z-999 {
+  z-index: 999;
+}
+
 .z-auto {
   z-index: auto;
 }
@@ -42020,6 +42024,10 @@ code {
     z-index: 50;
   }
 
+  .sm\:z-999 {
+    z-index: 999;
+  }
+
   .sm\:z-auto {
     z-index: auto;
   }
@@ -64148,6 +64156,10 @@ code {
 
   .md\:z-50 {
     z-index: 50;
+  }
+
+  .md\:z-999 {
+    z-index: 999;
   }
 
   .md\:z-auto {
@@ -86280,6 +86292,10 @@ code {
     z-index: 50;
   }
 
+  .lg\:z-999 {
+    z-index: 999;
+  }
+
   .lg\:z-auto {
     z-index: auto;
   }
@@ -108408,6 +108424,10 @@ code {
 
   .xl\:z-50 {
     z-index: 50;
+  }
+
+  .xl\:z-999 {
+    z-index: 999;
   }
 
   .xl\:z-auto {
