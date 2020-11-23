@@ -46,24 +46,27 @@ export default class UserController {
     const { error } = loginValidation(req.body);
 
     if (error) {
-      return res.status(400).send(error)
+      return res.status(400).send({message: error.message})
     }
 
     const user = await User.findOne({ email: req.body.email }) as UserI
     if (!user) {
-      return res.status(400).send('Email is not found')
+      return res.status(400).send({message: 'Email is not found'})
     }
 
     const validPass = await bcryptjs.compare(req.body.password, user.password)
     if (!validPass) {
-      return res.status(400).send('Invalid password')
+      return res.status(400).send({message: 'Invalid password'})
     }
 
-    const token = jwt.sign({ _id: user._id, role: user.role}, process.env.TOKEN_SECRET)
-    res.header('authToken', token).send({ 
-      email: user.email,
-      role: user.role,
-      token: token
+    const token = jwt.sign({ _id: user._id, role: user.role, email: user.email, name: user.name}, process.env.TOKEN_SECRET)
+    res.send({ 
+      user: {
+        email: user.email,
+        role: user.role,
+        name: user.name,
+      },
+      token: token,
     })
   }
 }

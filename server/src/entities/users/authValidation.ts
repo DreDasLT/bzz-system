@@ -25,11 +25,9 @@ export const registerValidation = (data: any) => {
 export const loginValidation = (data: any) => {
   return Joi.object({
     email: Joi.string()
-      .min(6)
       .required()
       .email(),
     password: Joi.string()
-      .min(4)
       .required()
   }).validate(data)
 }

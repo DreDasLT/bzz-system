@@ -5,6 +5,13 @@ import Main from './core/Main/Main';
 import * as serviceWorker from './core/serviceWorker';
 import { Provider } from 'react-redux'
 import store from './state/store/store'
+import { setAuthorizationToken, setCurrentUser } from './utils/authFunctions';
+import jwt from 'jsonwebtoken';
+
+if (localStorage.jwtToken) {
+  setAuthorizationToken(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)))
+}
 
 ReactDOM.render(
   <React.StrictMode>
