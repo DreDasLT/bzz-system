@@ -1,10 +1,9 @@
-import React, { useEffect, useState, Dispatch } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector  } from 'react-redux';
 import { AppState } from '../../../state/reducers/rootReducer';
-import { AuthActions } from '../../../state/actions/authActions';
 
 const Home = () => {
-  const { user, isAuthenticated } = useSelector((state: AppState) => state.auth);
+  const { user } = useSelector((state: AppState) => state.auth);
 
   return (
     <div>
