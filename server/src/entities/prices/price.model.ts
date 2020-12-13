@@ -3,7 +3,10 @@ import { Schema, model } from "mongoose"
 import PriceI from './price.interface'
 
 const PriceSchema = new Schema<PriceI>({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   minute: Number,
   hour: Number,
   day: Number,

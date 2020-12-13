@@ -3,7 +3,10 @@ import { Schema, model } from "mongoose"
 import ModelI from './model.interface'
 
 const ModelSchema = new Schema<ModelI>({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   prices: {
     type: Schema.Types.ObjectId,
     ref: "prices"

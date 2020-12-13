@@ -24,7 +24,6 @@ const CarSchema = new Schema<CarI>({
   licensePlate: String,
 })
 
-
 const Car = model('cars', CarSchema)
 
 export default Car
