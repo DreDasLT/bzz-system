@@ -5,4 +5,5 @@ export default interface CarI {
   gasTank: number
   status: number
   location: Array<number>
+  licensePlate: string
 }

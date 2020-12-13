@@ -30,3 +30,5 @@ app.listen(PORT, () => {
   console.log(`Started on: http://localhost:${PORT}`)
   connect()
 })
+
+export default app;

@@ -10,25 +10,6 @@ export default class CarController extends BaseController {
     super(Car)
   }
 
-  // public fill = async (req: Request, res: Response) => {
-  //   try {
-  //     cars.forEach(async (car) => {
-  //       const model = await Model.find({name: car.name});
-  //       const modelId = model[0]._id;
-  //       const hi = await this.model.create({
-  //         model: modelId,
-  //         gasTank: 100,
-  //         status: 0,
-  //         location: [car.lat, car.long]
-  //       })
-  //     })
-  //     res.send("Cars has been successfully filled.")
-  //   } catch (error) {
-  //     console.log(error)
-  //     res.status(400).send(`Error in POST ${error}`)
-  //   }
-  // }
-
   public get = async (req: Request, res: Response) => {
     try {
       const cars = await this.model.find().populate({

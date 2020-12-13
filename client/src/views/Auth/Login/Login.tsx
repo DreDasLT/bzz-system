@@ -1,8 +1,6 @@
-import React, { FormEvent, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import FlashMessage from '../../../components/FlashMessage';
-import { AppState } from '../../../state/reducers/rootReducer';
 import { login } from '../../../utils/authFunctions';
 
 const Login = () => {
@@ -27,6 +25,7 @@ const Login = () => {
           <img
             className='w-20 mx-auto mb-5'
             src='https://img.icons8.com/fluent/344/year-of-tiger.png'
+            alt="tiger"
           />
         </header>
 
@@ -63,7 +62,7 @@ const Login = () => {
           </div>
         </form>
 
-        <footer>
+        {/* <footer>
           <a
             className='text-indigo-700 hover:text-pink-700 text-sm float-left'
             href='#'
@@ -76,7 +75,7 @@ const Login = () => {
           >
             Create Account
           </a>
-        </footer>
+        </footer> */}
       </div>
     </div>
   );

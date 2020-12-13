@@ -20,9 +20,9 @@ const CarSchema = new Schema<CarI>({
   location: {
     type: [Number],
     index: '2dsphere'
-  }
+  },
+  licensePlate: String,
 })
-
 
 const Car = model('cars', CarSchema)
 

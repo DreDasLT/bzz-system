@@ -4,13 +4,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const MapView = () => {
-  const center = { lat: 51.721547, lng: -0.164687 };
   const zoom = 16;
-  const positions = [
-    { lat: 51.44737, lng: -0.336682 },
-    { lat: 51.674019, lng: 0.093973 },
-    { lat: 51.907979, lng: -0.208439 },
-  ];
 
   const [coords, setCoords] = useState<LatLngTuple>([0, 0]);
 

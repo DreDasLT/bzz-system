@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch } from 'react';
 import { BrowserRouter as Router, Link, Switch, Route, useRouteMatch, NavLink } from 'react-router-dom';
 import NotFound from '../NotFound/NotFound';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { HeaderActions } from '../../state/actions/headerActions';
 import Home from './Home/Home';
 import MapView from './Map/Map';
 import { logout } from '../../utils/authFunctions';
-import CarsList from './Admin/Cars/CarsList';
+import CarsList from './Admin/Cars/CarsList/CarsList';
 
 
 const Dashboard = () => {
@@ -24,7 +24,6 @@ const Dashboard = () => {
   };
   
   let match = useRouteMatch();
-  console.log(match)
 
   return (
     <>
@@ -70,13 +69,13 @@ const Dashboard = () => {
                 Cars
               </NavLink> : null}
             </nav>
-            <a
+            {/* <a
               href='#'
               className='absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4'
             >
               <i className='fas fa-arrow-circle-up mr-3'></i>
               Upgrade to Pro!
-            </a>
+            </a> */}
           </aside>
 
           <div className='relative w-full flex flex-col h-screen overflow-y-hidden'>
@@ -87,14 +86,14 @@ const Dashboard = () => {
                   onClick={() => handleHeaderProfileToggle()}
                   className='realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none'
                 >
-                  <img src='https://source.unsplash.com/uJ8LNVCBjFQ/400x400' />
+                  <img src='https://source.unsplash.com/uJ8LNVCBjFQ/400x400' alt="profile" />
                 </button>
                 {profileOpen && (
                   <div
                     x-show='isOpen'
                     className='absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16 z-999'
                   >
-                    <a
+                    {/* <a
                       href='#'
                       className='block px-4 py-2 account-link hover:text-white'
                     >
@@ -105,13 +104,13 @@ const Dashboard = () => {
                       className='block px-4 py-2 account-link hover:text-white'
                     >
                       Support
-                    </a>
-                    <a
+                    </a> */}
+                    <button
                       onClick={() => logout()}
-                      className='block px-4 py-2 account-link hover:text-white'
+                      className='pr-8 w-full py-2 account-link hover:text-white'
                     >
                       Sign Out
-                    </a>
+                    </button>
                   </div>
                 )}
               </div>

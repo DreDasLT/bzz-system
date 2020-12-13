@@ -19,7 +19,7 @@ export default class BaseController {
         res.status(201).send(dbData)
       }
     } catch (error) {
-      res.status(400).send(`Error in POST ${this.modelName}`)
+      res.status(400).send(error)
     }
   }
 

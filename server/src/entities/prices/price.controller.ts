@@ -10,21 +10,6 @@ export default class PriceController extends BaseController {
     super(Price)
   }
 
-  // public fill = async (req: Request, res: Response) => {
-  //   try {
-  //     cars.forEach(async (car) => {
-  //       await this.model.create({
-  //         name: car.model,
-  //         ...car.prices
-  //       })
-  //     })
-  //     res.send("Prices has been successfully filled.")
-  //   } catch (error) {
-  //     console.log(error)
-  //     res.status(400).send(`Error in POST ${error}`)
-  //   }
-  // }
-
   public get = async (req: Request, res: Response) => {
     try {
       const prices = await this.model.find() as PriceI[]

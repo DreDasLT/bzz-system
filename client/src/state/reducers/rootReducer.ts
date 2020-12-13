@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux'
 import authReducer from './authReducer';
-import countReducer from './countReducer'
+import carReducer from './carReducer';
 import headerReducer from './headerReducer';
 import MessageReducer from './messageReducer';
-import nameReducer from './nameReducer';
+import modalReducer from './modalReducer';
+import modelReducer from './modelReducer';
 const rootReducer = combineReducers({
-    count: countReducer,
-    name: nameReducer,
     header: headerReducer,
     auth: authReducer,
-    message: MessageReducer
+    message: MessageReducer,
+    modal: modalReducer,
+    models: modelReducer,
+    cars: carReducer
 })
 export type AppState = ReturnType<typeof rootReducer>
 export default rootReducer;

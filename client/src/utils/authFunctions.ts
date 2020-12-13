@@ -1,8 +1,5 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken'
-import { Dispatch } from 'react';
-import { useDispatch } from 'react-redux';
-import { AuthActions } from '../state/actions/authActions';
 import store from '../state/store/store';
 import { deleteMessage, setMessage } from './messageFunctions';
 import history from './routingFunctions'
