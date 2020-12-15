@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../../../../components/Modal/Modal'
 import { ModalActions, ModalTypes } from '../../../../../state/actions/modalActions';
 import { AppState } from '../../../../../state/reducers/rootReducer';
-import { addCar } from '../../../../../utils/carFunctions';
+import { addCar, deleteCar, editCar } from '../../../../../utils/carFunctions';
+import ICar from '../../../../../utils/entity/carType';
 
-const AddCar = props => {
+const EditCar = props => {
 
   const { isOpen, modalType } = useSelector((state: AppState) => state.modal);
   const { models } = useSelector((state: AppState) => state.models);
+  const { selectedCar } = useSelector((state: AppState) => state.cars);
   const modalDispatch = useDispatch<Dispatch<ModalActions>>();
 
   const handleModalClose = () => {
@@ -23,23 +25,27 @@ const AddCar = props => {
       return;
     }
 
-    setModel(models[0]._id)
-  }, [models])
+    setModel(selectedCar?.model || models[0]._id)
+    setPlate(selectedCar?.licensePlate || '')
+  }, [models, selectedCar])
 
-  const handleCarCreate = () => {
-    console.log(plate, model)
+  const handleCarSave = () => {
     if (!plate || !model) {
       return;
     }
 
-    addCar({licensePlate: plate, model: model})
+    editCar({...selectedCar, licensePlate: plate, model: model})
+  }
+
+  const handleCarDelete = () => {
+    deleteCar(selectedCar as ICar);
   }
 
   return (
     <>
-      <Modal open={isOpen && modalType === ModalTypes.ADD_CAR} onClose={() => handleModalClose()}>
+      <Modal open={isOpen && modalType === ModalTypes.EDIT_CAR} onClose={handleModalClose}>
         <h2 className='font-bold text-2xl mb-6 text-gray-800 border-b pb-2'>
-          Add Car
+          Edit
         </h2>
 
         <div className='inline-block w-64 mb-4'>
@@ -85,20 +91,32 @@ const AddCar = props => {
           />
         </div> */}
 
-        <div className='mt-8 text-right'>
+        <div className='mt-8 flex w-full justify-between'>
+          <div className=''>
           <button
-            type='button'
-            className='bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm mr-2'
-          >
-            Cancel
-          </button>
-          <button
-            type='button'
-            className='bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-700 rounded-lg shadow-sm'
-            onClick={handleCarCreate}
-          >
-            Create Car
-          </button>
+              type='button'
+              className='bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm'
+              onClick={handleCarDelete}
+            >
+              Delete
+            </button>
+          </div>
+          <div className=''>
+            <button
+              type='button'
+              className='bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm mr-2'
+              onClick={handleModalClose}
+            >
+              Cancel
+            </button>
+            <button
+              type='button'
+              className='bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-700 rounded-lg shadow-sm'
+              onClick={handleCarSave}
+            >
+              Save
+            </button>
+          </div>
         </div>
       </Modal>
     </>
@@ -106,4 +124,4 @@ const AddCar = props => {
 }
 
 
-export default AddCar
+export default EditCar

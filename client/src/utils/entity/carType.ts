@@ -7,6 +7,6 @@ export default interface ICar {
   lastUpdated?: Date
   location?: [number, number]
   status?: number
-  model: IModel
+  model: string
   licensePlate: string
 }

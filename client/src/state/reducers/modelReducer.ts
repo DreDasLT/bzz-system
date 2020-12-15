@@ -1,7 +1,7 @@
 import IModel from '../../utils/entity/modelType';
 import { ModelActions } from '../actions/modelActions';
 
-type ModelState = {
+export type ModelState = {
   models: Array<IModel>;
 };
 const initialState: ModelState = {

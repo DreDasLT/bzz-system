@@ -1,10 +1,12 @@
-import { ModalActions } from '../actions/modalActions';
+import { ModalActions, ModalTypes } from '../actions/modalActions';
 
 type ModalState = {
   isOpen: boolean;
+  modalType: ModalTypes | null;
 };
 const initialState: ModalState = {
   isOpen: false,
+  modalType: null,
 };
 const modalReducer = (
   state: ModalState = initialState,
@@ -15,16 +17,19 @@ const modalReducer = (
       return {
         ...state,
         isOpen: true,
+        modalType: action.modalType
       };
     case 'HIDE_MODAL':
       return {
         ...state,
         isOpen: false,
+        modalType: null
       };
     case 'TOGGLE_MODAL':
       return {
         ...state,
         isOpen: !state.isOpen,
+        modalType: action.modalType
       };
     default:
       return state;
