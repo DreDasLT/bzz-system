@@ -176,11 +176,11 @@ const Dashboard = () => {
                   <Route component={NotFound} />
                 </Switch>
               </main>
-
-              <footer className="w-full bg-white text-right p-4">
-                Built by <span className="underline">Vilius Antanavičius</span>.
-              </footer>
             </div>
+
+            <footer className="w-full bg-white text-right p-4">
+              Built by <span className="underline">Vilius Antanavičius</span>.
+            </footer>
           </div>
         </div>
       </Router>

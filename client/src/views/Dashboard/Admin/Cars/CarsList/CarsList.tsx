@@ -1,22 +1,51 @@
-import React, { Dispatch, useEffect } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ModalActions } from '../../../../../state/actions/modalActions';
+import { ModalActions, ModalTypes } from '../../../../../state/actions/modalActions';
 import AddCar from '../AddCar/AddCar';
-import { getCarList, getModelList } from '../../../../../utils/carFunctions';
+import { getCarList, getCarModel, getModelList } from '../../../../../utils/carFunctions';
 import { AppState } from '../../../../../state/reducers/rootReducer';
+import EditCar from '../EditCar/EditCar';
+import { CarActions } from '../../../../../state/actions/carActions';
+import ICar from '../../../../../utils/entity/carType';
+import { wait } from '@testing-library/react';
 
 const CarsList = (props) => {
   const modalDispatch = useDispatch<Dispatch<ModalActions>>();
+  const carDispatch = useDispatch<Dispatch<CarActions>>();
 
-  const handleModalOpen = () => {
-    modalDispatch({ type: 'OPEN_MODAL' })
+  const handleCreateCarModalOpen = () => {
+    modalDispatch({ 
+      type: 'OPEN_MODAL',
+      modalType: ModalTypes.ADD_CAR
+    })
   };
+
+  const handleEditCarModalOpen = (car: ICar) => {
+    carDispatch({
+      type: 'SET_SELECTED_CAR',
+      selectedCar: car
+    })
+
+    modalDispatch({ 
+      type: 'OPEN_MODAL',
+      modalType: ModalTypes.EDIT_CAR
+    })
+  };
+
 
   const { cars } = useSelector((state: AppState) => state.cars);
 
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
-    getCarList()
-    getModelList()
+    const wait = async () => {
+      setLoading(true)
+      await getCarList()
+      await getModelList()
+      setLoading(false)
+    }
+
+    wait()
   }, []);
 
   return (
@@ -25,13 +54,14 @@ const CarsList = (props) => {
       <button
         type='button'
         className='bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-4 m-2 mr-4 border border-gray-700 rounded-lg shadow-sm'
-        onClick={handleModalOpen}
+        onClick={handleCreateCarModalOpen}
       >
         Create Car
       </button>
       </div>
       <AddCar></AddCar>
-      <div className="w-full p-4">
+      <EditCar></EditCar>
+      <div className="w-full p-4 overflow-x-auto">
       <table className='min-w-full leading-normal'>
         <thead>
           <tr>
@@ -56,10 +86,10 @@ const CarsList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {cars.length
+          {!loading && cars.length
             ? cars.map((car) => (
-                <tr key={car._id}>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                <tr key={car._id} className='bg-white hover:bg-gray-200 cursor-pointer' onClick={() => handleEditCarModalOpen(car)}>
+                  <td className='px-5 py-5 border-b border-gray-200 text-sm'>
                     <div className='flex items-center'>
                       <div className='flex-shrink-0 w-10 h-10'>
                         {/* <img
@@ -71,38 +101,38 @@ const CarsList = (props) => {
                       </div>
                       <div className='ml-3'>
                         <p className='text-gray-900 whitespace-no-wrap'>
-                          {car.model?.name ? car.model?.name : '-'}
+                          {getCarModel(car)?.name} <span className='text-red-600'>({car.licensePlate})</span>
                         </p>
                       </div>
                     </div>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-5 border-b border-gray-200 text-sm'>
                     <p className='text-gray-900 whitespace-no-wrap'>
                       {car.gasTank ? car.gasTank : '-'}
                     </p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-5 border-b border-gray-200 text-sm'>
                     <p className='text-gray-900 whitespace-no-wrap'>
-                      {car.model?.prices?.day
-                        ? car.model?.prices?.day + '€'
+                      {getCarModel(car)?.prices?.day
+                        ? getCarModel(car)?.prices?.day + '€'
                         : '-'}
                     </p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-5 border-b border-gray-200 text-sm'>
                     <p className='text-gray-900 whitespace-no-wrap'>
-                      {car.model?.prices?.hour
-                        ? car.model?.prices?.hour + '€'
+                      {getCarModel(car)?.prices?.hour
+                        ? getCarModel(car)?.prices?.hour + '€'
                         : '-'}
                     </p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-5 border-b border-gray-200 text-sm'>
                     <p className='text-gray-900 whitespace-no-wrap'>
-                      {car.model?.prices?.minute
-                        ? car.model?.prices?.minute + '€'
+                      {getCarModel(car)?.prices?.minute
+                        ? getCarModel(car)?.prices?.minute + '€'
                         : '-'}
                     </p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-5 border-b border-gray-200 text-sm'>
                     <span className='relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
                       <span
                         aria-hidden

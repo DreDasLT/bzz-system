@@ -12,12 +12,7 @@ export default class CarController extends BaseController {
 
   public get = async (req: Request, res: Response) => {
     try {
-      const cars = await this.model.find().populate({
-        path: 'model',
-        populate: {
-          path: 'prices'
-        }
-    }) as CarI[]
+      const cars = await this.model.find() as CarI[]
       res.send(cars)
     } catch (error) {
       res.status(400).send(`Error in GET ${this.modelName}`)
